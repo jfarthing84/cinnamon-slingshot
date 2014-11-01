@@ -162,17 +162,24 @@ AppSystem.prototype = {
 
     getAppsByName: function() {
 
-        let appList = [];
+        let sortedAppList = [];
+        let sortedAppExecs = [];
 
-        for (let category in this._apps ) {
-            appList = appList.concat(this._apps[category]);
+        for (let category in this._apps) {
+            let apps = this._apps[category];
+            apps.forEach(function(app) {
+                if (sortedAppExecs.indexOf(app.exec) == -1) {
+                    sortedAppList.push(app);
+                    sortedAppExecs.push(app.exec);
+                }
+            });
         }
 
-        appList.sort(function(a, b) {
+        sortedAppList.sort(function(a, b) {
             return a.name.toLowerCase() > b.name.toLowerCase();
         });
 
-        return appList;
+        return sortedAppList;
     },
 
     searchResults: function(search) {
