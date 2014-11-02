@@ -9,6 +9,11 @@
     "separator-panel-bottom": {
         "type": "separator"
     },
+    "overlay-key": {
+        "type": "generic",
+        "description": "Keyboard shortcut to open and close Slingshot",
+        "default": "Super_L::Super_R"
+    },
     "menu-icon-custom": {
         "type": "checkbox",
         "default": "false",

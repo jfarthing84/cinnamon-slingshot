@@ -1249,11 +1249,6 @@ SlingshotView.prototype = {
         let symbol = event.get_key_symbol();
         let modifierType = Cinnamon.get_event_state(event);
 
-        if (global.display.get_is_overlay_key(event.get_key_code(), modifierType) && this.isOpen) {
-            this.close(true);
-            return true;
-        }
-
         switch (symbol) {
             case Clutter.KEY_F4:
                 if (modifierType == Clutter.ModifierType.MOD1_MASK)
@@ -1806,6 +1801,10 @@ var Slingshot = {
             this.settings.bindProperty(Settings.BindingDirection.IN, 'menu-icon-custom', 'menuIconCustom', this._updateIconAndLabel);
             this.settings.bindProperty(Settings.BindingDirection.IN, 'menu-icon', 'menuIcon', this._updateIconAndLabel);
             this.settings.bindProperty(Settings.BindingDirection.IN, 'menu-label', 'menuLabel', this._updateIconAndLabel);
+            this.settings.bindProperty(Settings.BindingDirection.IN, 'overlay-key', 'overlayKey', this._updateKeybinding);
+
+            this._updateKeybinding();
+
             Main.themeManager.connect('theme-set', Lang.bind(this, this._updateIconAndLabel));
             this._updateIconAndLabel();
 
@@ -1814,14 +1813,6 @@ var Slingshot = {
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menuManager.addMenu(this._view);
-
-            global.display.connect('overlay-key', Lang.bind(this, function() {
-                try {
-                    this._view.showSlingshot();
-                } catch(e) {
-                    global.logError(e);
-                }
-            }));
 
         } catch (e) {
             global.logError(e);
@@ -1852,6 +1843,13 @@ var Slingshot = {
             this.set_applet_label(_(this.menuLabel));
         else
             this.set_applet_label("");
+    },
+
+    _updateKeybinding: function() {
+        Main.keybindingManager.addHotKey("overlay-key", this.overlayKey, Lang.bind(this, function() {
+            if (!Main.overview.visible && !Main.expo.visible)
+                this.on_applet_clicked();
+        }));
     },
 
     on_applet_clicked: function(event) {
