@@ -122,8 +122,10 @@ Widgets.SearchBar.prototype = {
     },
 
     _onChanged: function() {
-        if (this._timeoutId > 0)
+        if (this._timeoutId > 0) {
             Mainloop.source_remove(this._timeoutId);
+            this._timeoutId = 0;
+        }
 
         this._timeoutId = Mainloop.timeout_add(this.pauseDelay, Lang.bind(this, this._emitTextChanged));
     },
@@ -132,7 +134,10 @@ Widgets.SearchBar.prototype = {
         let terms = this.actor.get_text();
         this.emit('text-changed-pause', terms);
 
-        return Mainloop.source_remove(this._timeoutId);
+        Mainloop.source_remove(this._timeoutId);
+        this._timeoutId = 0;
+
+        return true;
     }
 }
 
