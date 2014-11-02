@@ -60,7 +60,7 @@ App.prototype = {
                 GLib.spawn_command_line_async(this.exec);
             } else {
                 this.emit('launched', this);
-                new Gio.DesktopAppInfo.new(this.desktopId).launch([], null);
+                Gio.DesktopAppInfo.new(this.desktopId).launch([], null);
                 global.log('Launching application: ' + this.name);
             }
         } catch (e) {
