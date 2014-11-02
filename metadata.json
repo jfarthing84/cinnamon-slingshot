@@ -3,5 +3,5 @@
     "name": "Slingshot",
     "description": "A clone of Pantheon's Slingshot launcher in the form of a Cinnamon applet.",
     "max-instances": 1,
-    "version": "1.0.1"
+    "version": "1.0.2"
 }
