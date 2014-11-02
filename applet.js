@@ -596,22 +596,18 @@ Grid.prototype = {
     },
 
     getChildAt: function(column, row) {
-        try {
-            let children = this.actor.get_children();
-            let child;
+        let children = this.actor.get_children();
+        let child;
 
-            for (let index in children) {
-                let meta = this.actor.get_child_meta(children[index]);
-                if (column == meta.col && row == meta.row) {
-                    child = children[index];
-                    break;
-                }
+        for (let index in children) {
+            let meta = this.actor.get_child_meta(children[index]);
+            if (column == meta.col && row == meta.row) {
+                child = children[index];
+                break;
             }
-
-            return child;
-        } catch(e) {
-            global.logError(e);
         }
+
+        return child;
     }
 }
 Signals.addSignalMethods(Grid.prototype);
