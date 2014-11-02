@@ -361,7 +361,7 @@ CategoryView.prototype = {
     setupSidebar: function() {
 
         if (this.categorySwitcher != null)
-            this.categorySwitcher.destroy();
+            this.categorySwitcher.actor.destroy();
 
         this.categorySwitcher = new Sidebar();
         this.categorySwitcher.actor.can_focus = false;
