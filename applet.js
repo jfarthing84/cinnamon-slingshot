@@ -83,10 +83,7 @@ AppSystem.prototype = {
         this._categories = null;
         this._apps = null;
 
-        this._appsMenu = new CMenu.Tree({
-            menu_basename: 'cinnamon-applications.menu',
-            flags: CMenu.TreeFlags.INCLUDE_EXCLUDED
-        });
+        this._appsMenu = Cinnamon.AppSystem.get_default().get_tree();
         this._appsMenu.connect('changed', Lang.bind(this, this._updateAppSystem));
 
         this._updateAppSystem();
@@ -148,8 +145,11 @@ AppSystem.prototype = {
                     appList.concat(this.getAppsByCategory(iter.get_directory()));
                     break;
                 case CMenu.TreeItemType.ENTRY:
-                    let app = new App(iter.get_entry());
-                    appList.push(app);
+                    let entry = iter.get_entry();
+                    if (entry.get_app_info().should_show()) {
+                        let app = new App(entry);
+                        appList.push(app);
+                    }
                     break;
             }
         }
