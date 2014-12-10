@@ -865,11 +865,26 @@ Sidebar.prototype = {
     _init: function() {
 
         this.actor = new St.BoxLayout({
+            reactive: true,
             vertical: true,
             width: 145
         });
         this.actor.add_style_class_name('sidebar');
         this.actor._delegate = this;
+
+        this.actor.connect('scroll-event', Lang.bind(this, function(actor, event) {
+            switch (event.get_scroll_direction()) {
+                case Clutter.ScrollDirection.UP:
+                case Clutter.ScrollDirection.LEFT:
+                    this.selectNth(this.selected - 1);
+                    break;
+                case Clutter.ScrollDirection.DOWN:
+                case Clutter.ScrollDirection.RIGHT:
+                    this.selectNth(this.selected + 1);
+                    break;
+            }
+            return true;
+        }));
     },
 
     addCategory: function(entryName) {
