@@ -146,7 +146,8 @@ Widgets.ModeButton.prototype = {
     _init: function() {
 
         this.actor = new St.BoxLayout({
-            can_focus: false
+            can_focus: false,
+            reactive: true
         });
 
         this._selected = -1;
@@ -154,6 +155,21 @@ Widgets.ModeButton.prototype = {
 
         this.actor.add_style_class_name(Gtk.STYLE_CLASS_LINKED);
         this.actor.add_style_class_name('raised');
+
+        this.actor.connect('scroll-event', Lang.bind(this, function(actor, event) {
+            global.log('scrolled');
+            switch (event.get_scroll_direction()) {
+                case Clutter.ScrollDirection.UP:
+                case Clutter.ScrollDirection.LEFT:
+                    this.setActive(this.selected - 1);
+                    break;
+                case Clutter.ScrollDirection.DOWN:
+                case Clutter.ScrollDirection.RIGHT:
+                    this.setActive(this.selected + 1);
+                    break;
+            }
+            return true;
+        }));
     },
 
     append: function(w, tooltip) {
