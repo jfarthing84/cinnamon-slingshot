@@ -146,7 +146,7 @@ AppSystem.prototype = {
                     break;
                 case CMenu.TreeItemType.ENTRY:
                     let entry = iter.get_entry();
-                    if (entry.get_app_info().should_show()) {
+                    if (!entry.get_app_info().get_nodisplay()) {
                         let app = new App(entry);
                         appList.push(app);
                     }
