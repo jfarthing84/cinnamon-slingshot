@@ -1546,8 +1546,6 @@ SlingshotView.prototype = {
 
     _setModality: function(newModality) {
 
-        let paddingLeft = this.box.get_theme_node().get_padding(St.Side.LEFT);
-
         this._modality = newModality;
 
         switch (this._modality) {
@@ -1565,7 +1563,7 @@ SlingshotView.prototype = {
 
                 // change the paddings/margins back to normal
                 //get_content_area().set_margin_left(PADDINGS.left + SHADOW_SIZE + 5);
-                this.box.set_style('padding-left: ' + paddingLeft + 5);
+                this.box.set_style('padding-left: 5px');
                 this.center.set_margin_left(12);
                 this.top.set_margin_left(12);
                 this.viewManager.set_size(this._defaultColumns * 130, this._defaultRows * 145);
@@ -1585,7 +1583,7 @@ SlingshotView.prototype = {
 
                 // remove the padding/margin on the left
                 //get_content_area().set_margin_left(PADDINGS.left + SHADOW_SIZE);
-                this.box.set_style('padding-left: 0');
+                this.box.set_style('padding-left: 0px');
                 this.center.set_margin_left(0);
                 this.top.set_margin_left(17);
                 this.viewManager.set_size(this._defaultColumns * 130 + 17, this._defaultRows * 145);
@@ -1601,7 +1599,7 @@ SlingshotView.prototype = {
 
                 // change the paddings/margins back to normal
                 //get_content_area().set_margin_left(PADDINGS.left + SHADOW_SIZE + 5);
-                this.box.set_style('padding-left: ' + paddingLeft + 5);
+                this.box.set_style('padding-left: 5px');
                 this.center.set_margin_left(12);
                 this.top.set_margin_left(12);
                 this.viewManager.set_size(this._defaultColumns * 130, this._defaultRows * 145);
