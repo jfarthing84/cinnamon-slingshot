@@ -1847,7 +1847,7 @@ var Slingshot = {
                     this.set_applet_icon_name(this.menuIcon);
             }
             else if (Gtk.IconTheme.get_default().has_icon("menu")) this.set_applet_icon_name("menu");
-            else this.set_applet_icon_path(global.datadir + '/theme/menu.svg');
+            else this.set_applet_icon_path(global.datadir + '/theme/menu-symbolic.svg');
         } catch(e) {
            global.logWarning("Could not load icon file \"" + this.menuIcon + "\" for menu button");
         }
