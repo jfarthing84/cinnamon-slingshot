@@ -14,6 +14,7 @@ const Settings = imports.ui.settings;
 const Signals = imports.signals;
 const St = imports.gi.St;
 const Tooltips = imports.ui.tooltips;
+const Util = imports.misc.util;
 
 const AppletPath = imports.ui.appletManager.applets['slingshot@jfarthing84'];
 const Granite = AppletPath.granite;
@@ -1888,6 +1889,10 @@ var Slingshot = {
             if (!Main.overview.visible && !Main.expo.visible)
                 this.on_applet_clicked();
         }));
+    },
+
+    _launch_editor: function() {
+        Util.spawnCommandLine("cinnamon-menu-editor");
     },
 
     on_applet_clicked: function(event) {

@@ -1,14 +1,4 @@
 {
-    "separator-panel-top": {
-        "type": "separator"
-    },
-    "header-panel": {
-        "type": "header",
-        "description": "Panel Button"
-    },
-    "separator-panel-bottom": {
-        "type": "separator"
-    },
     "overlay-key": {
         "type": "generic",
         "description": "Keyboard shortcut to open and close Slingshot",
@@ -34,16 +24,6 @@
         "default": "Menu",
         "description": "Text",
         "tooltip": "Enter custom text to show in the panel."
-    },
-    "separator-slingshot-top": {
-        "type": "separator"
-    },
-    "header-slingshot": {
-        "type": "header",
-        "description": "Slingshot"
-    },
-    "separator-slingshot-bottom": {
-        "type": "separator"
     },
     "slingshot-icon-size": {
         "type": "spinbutton",
@@ -83,5 +63,11 @@
     "slingshot-screen-resolution": {
         "type": "generic",
         "default": ""
+    },
+    "menu-editor-button": {
+        "type": "button",
+        "description": "Open the menu editor",
+        "callback": "_launch_editor",
+        "tooltip": "Press this button to customize your menu entries."
     }
 }
