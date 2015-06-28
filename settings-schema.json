@@ -1,6 +1,6 @@
 {
     "overlay-key": {
-        "type": "generic",
+        "type": "keybinding",
         "description": "Keyboard shortcut to open and close Slingshot",
         "default": "Super_L::Super_R"
     },
