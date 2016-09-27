@@ -106,16 +106,50 @@ AppSystem.prototype = {
 
         this._categories = [];
 
+		let dirs = [];
         let iter = this._appsMenu.get_root_directory().iter();
         let type;
 
         while ((type = iter.next()) != CMenu.TreeItemType.INVALID) {
             if (type == CMenu.TreeItemType.DIRECTORY) {
-                let dir = iter.get_directory();
-                if (!dir.get_is_nodisplay())
-                    this._categories.push(dir);
+                dirs.push(iter.get_directory());
             }
         }
+
+        let prefCats = ["administration", "preferences"];
+
+        dirs = dirs.sort(function(a, b) {
+                    let menuIdA = a.get_menu_id().toLowerCase();
+                    let menuIdB = b.get_menu_id().toLowerCase();
+
+                    let prefIdA = prefCats.indexOf(menuIdA);
+                    let prefIdB = prefCats.indexOf(menuIdB);
+
+                    if (prefIdA < 0 && prefIdB >= 0) {
+                      return -1;
+                    }
+                    if (prefIdA >= 0 && prefIdB < 0) {
+                      return 1;
+                    }
+
+                    let nameA = a.get_name().toLowerCase();
+                    let nameB = b.get_name().toLowerCase();
+
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    return 0;
+                });
+
+        for(let i = 0; i < dirs.length; i++) {
+            let dir = dirs[i];
+            if (!dir.get_is_nodisplay())
+                this._categories.push(dir);
+        }
+
     },
 
     _updateApps: function() {
